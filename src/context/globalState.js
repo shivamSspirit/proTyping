@@ -35,7 +35,7 @@ const GlobalProvider = ({ children }) => {
                         setuserAnswer([...useranswer, answer?.toLowerCase()])
                         const val = maingenerator();
                         setVal(val.toLowerCase())
-                    }, 0)
+                    }, 94)
                 }
             }
     }, [n, ,val, answer, isActive, useranswer])
