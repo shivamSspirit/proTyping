@@ -44,7 +44,7 @@ const GlobalProvider = ({ children }) => {
         if (val !== answer) {
             setCounter(counter => counter + 0.5)
         }
-    }, [answer])
+    }, [answer,val])
 
     useEffect(() => {
         if (n === 0) {
