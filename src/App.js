@@ -6,8 +6,9 @@ import GlobalProvider from './context/globalState';
 
 function App() {
   return (
-    <div className="App">
-      <GlobalProvider>
+    <GlobalProvider>
+      <div className="App">
+
         <div className='game-container'>
           <h1>Type the Alphabates</h1>
           <p>Typing game to see how you fast you type. Timer and Game start when you click on <strong>Start Game</strong> button show in time section</p>
@@ -15,8 +16,9 @@ function App() {
             <Timer />
           </div>
         </div>
-      </GlobalProvider>
-    </div>
+
+      </div>
+    </GlobalProvider>
   );
 }
 

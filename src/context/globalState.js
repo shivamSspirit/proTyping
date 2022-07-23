@@ -44,7 +44,7 @@ const GlobalProvider = ({ children }) => {
         if (val !== answer) {
             setCounter(counter => counter + 0.5)
         }
-    }, [answer,val])
+    }, [answer])
 
     useEffect(() => {
         if (n === 0) {
@@ -52,7 +52,7 @@ const GlobalProvider = ({ children }) => {
             stopTimer();
             console.log('timescore', counter)
         }
-    }, [n])
+    }, [n,counter])
 
     function handleAnswerChange(e) {
         setAnswer(e.key)
