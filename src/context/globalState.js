@@ -49,7 +49,13 @@ const GlobalProvider = ({ children }) => {
 
     useEffect(() => {
         if (n === 0) {
-            localStorage.setItem('score', counter)
+            if(localStorage.getItem("score")){
+                if(counter<localStorage.getItem("score")){
+                    localStorage.setItem("score",counter)
+                }
+            }else{
+                localStorage.setItem("score", counter)
+            }
         }
     }, [n])
 
@@ -88,6 +94,7 @@ const GlobalProvider = ({ children }) => {
         setAnswer('');
         setVal('');
         setN(20);
+        localStorage.removeItem("score")
     }
 
 

@@ -3,19 +3,15 @@ import './timer.css'
 import { useGlobal } from '../../context/globalState'
 
 function Timer() {
-    const { minute, val, second, setIsActive, isActive, stopTimer, answer, handleAnswerChange,counter ,n} = useGlobal()
+    const { minute, val, second, setIsActive, isActive, stopTimer, answer, handleAnswerChange, counter, n } = useGlobal()
 
     const [mainScore, setMainscore] = useState(0)
 
     useEffect(() => {
         if (localStorage.getItem('score')) {
-            if(counter<localStorage.getItem('score')){
-                localStorage.setItem('score',counter)
-            }else{
-                setMainscore(localStorage.getItem('score'))
-            }
+            setMainscore(localStorage.getItem('score'))
         }
-    }, [localStorage.getItem('score'),n])
+    }, [localStorage.getItem('score'), n])
 
 
     return (
