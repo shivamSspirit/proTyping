@@ -42,7 +42,8 @@
    box-sizing: border-box;
    font-size: 22px;
    color: aliceblue;
-   background: linear-gradient(90deg, rgb(12, 12, 70) 0%, rgb(3, 7, 87) 35%, rgb(16, 27, 66) 100%);
+   background: linear-gradient(90deg, rgb(3, 3, 54) 0%, rgb(6, 9, 53) 35%, rgb(4, 12, 43) 100%);
+   font-weight: 400;
  }
 
  @keyframes App-logo-spin {

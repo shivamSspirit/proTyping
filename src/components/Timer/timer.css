@@ -6,6 +6,7 @@
   border-radius: 10px;
   font-family: "Inter", sans-serif;
   gap:1rem;
+  font-weight: 300;
 }
 
 .char-container {
