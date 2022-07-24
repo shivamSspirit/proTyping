@@ -3,33 +3,34 @@ import React, { useState, useEffect, useContext } from "react";
 const GlobalContext = React.createContext('TimeContext');
 
 const GlobalProvider = ({ children }) => {
-
     const maingenerator = () => {
         const alphabet = "abcdefghijklmnopqrstuvwxyz"
         return alphabet[Math.floor(Math.random() * alphabet.length)]
     }
 
-
     const [second, setSecond] = useState('00');
     const [minute, setMinute] = useState('00');
+
     const [isActive, setIsActive] = useState(false);
+
     const [counter, setCounter] = useState(0);
-    const [showSuccess,setShowSucces] = useState('')
+    // const [showSuccess, setShowSucces] = useState('')
 
     const [n, setN] = useState(20)
+
     const [val, setVal] = useState(maingenerator())
+
     const [answer, setAnswer] = useState('')
+
     const [useranswer, setuserAnswer] = useState([])
 
-    console.log('useranser',useranswer)
 
 
-   
     useEffect(() => {
         if (isActive)
             if (n > 0) {
                 if (val.toLowerCase() === answer.toLowerCase()) {
-                   
+
                     setTimeout(() => {
                         setN(n => n - 1);
                         setuserAnswer([...useranswer, answer?.toLowerCase()])
@@ -38,7 +39,7 @@ const GlobalProvider = ({ children }) => {
                     }, 94)
                 }
             }
-    }, [n, ,val, answer, isActive, useranswer])
+    }, [n, val, answer, isActive, useranswer])
 
     useEffect(() => {
         if (val !== answer) {
@@ -48,11 +49,9 @@ const GlobalProvider = ({ children }) => {
 
     useEffect(() => {
         if (n === 0) {
-            setShowSucces('success')
-            stopTimer();
-            console.log('timescore', counter)
+            localStorage.setItem('score', counter)
         }
-    }, [n,counter])
+    }, [n])
 
     function handleAnswerChange(e) {
         setAnswer(e.key)
@@ -94,7 +93,7 @@ const GlobalProvider = ({ children }) => {
 
 
     const contextValue = {
-        minute, second, setIsActive, isActive, stopTimer, answer, val, handleAnswerChange,showSuccess,counter
+        minute, second, setIsActive, isActive, stopTimer, answer, val, handleAnswerChange, counter,stopTimer
     }
     return (
         <GlobalContext.Provider value={contextValue}>

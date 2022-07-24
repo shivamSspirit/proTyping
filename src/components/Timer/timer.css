@@ -36,6 +36,10 @@
   justify-items: flex-start;
 }
 
+.scorebox{
+  margin-top: 2rem;
+}
+
 .button {
   /* padding: 0.8rem 2rem; */
   border: none;

@@ -3,7 +3,21 @@ import './timer.css'
 import { useGlobal } from '../../context/globalState'
 
 function Timer() {
-    const { minute, val, second, setIsActive, isActive, stopTimer, answer, handleAnswerChange } = useGlobal()
+    const { minute, val, second, setIsActive, isActive, stopTimer, answer, handleAnswerChange,counter ,n} = useGlobal()
+
+    const [mainScore, setMainscore] = useState(0)
+
+    useEffect(() => {
+        if (localStorage.getItem('score')) {
+            if(counter<localStorage.getItem('score')){
+                localStorage.setItem('score',counter)
+            }else{
+                setMainscore(localStorage.getItem('score'))
+            }
+        }
+    }, [localStorage.getItem('score'),n])
+
+
     return (
         <div className='mainContainer'>
             <div className="container">
@@ -20,6 +34,10 @@ function Timer() {
                 </div>
 
                 <button onClick={() => setIsActive(!isActive)} className="button start"> {isActive ? "Pause Game" : "Start Game"}</button>
+
+                <div className='scorebox'>
+                    MY Best Time : {`${mainScore ? mainScore : 'not yet pls play game'}`}
+                </div>
                 <div className="buttons">
                     <div className='input-container'>
                         <input placeholder='Type here' className='char-input' type="text" value={answer} onKeyPress={handleAnswerChange} />
