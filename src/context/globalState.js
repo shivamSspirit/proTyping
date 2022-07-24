@@ -3,29 +3,32 @@ import React, { useState, useEffect, useContext } from "react";
 const GlobalContext = React.createContext('TimeContext');
 
 const GlobalProvider = ({ children }) => {
+    // generate single char
     const maingenerator = () => {
         const alphabet = "abcdefghijklmnopqrstuvwxyz"
         return alphabet[Math.floor(Math.random() * alphabet.length)]
     }
-
+    // second && minute counter state
     const [second, setSecond] = useState('00');
     const [minute, setMinute] = useState('00');
-
+    //  when app starts
     const [isActive, setIsActive] = useState(false);
-
     const [counter, setCounter] = useState(0);
-    // const [showSuccess, setShowSucces] = useState('')
-
+    // char iteration
     const [n, setN] = useState(20)
-
+    // get value from function generateor
     const [val, setVal] = useState(maingenerator())
-
+    // typed char from user
     const [answer, setAnswer] = useState('')
-
+    // all right answers of user in one game
     const [useranswer, setuserAnswer] = useState([])
 
+    // for success or beaten
+    const [success, setSuccess] = useState('')
 
 
+
+    // effect for moving forward when user enter right char
     useEffect(() => {
         if (isActive)
             if (n > 0) {
@@ -41,19 +44,24 @@ const GlobalProvider = ({ children }) => {
             }
     }, [n, val, answer, isActive, useranswer])
 
+
+    // effect for single time penelty
     useEffect(() => {
         if (val !== answer) {
             setCounter(counter => counter + 0.5)
         }
-    }, [answer,isActive])
+    }, [answer, isActive])
 
+
+
+    // effect for persisting score
     useEffect(() => {
         if (n === 0) {
-            if(localStorage.getItem("score")){
-                if(counter<localStorage.getItem("score")){
-                    localStorage.setItem("score",counter)
+            if (localStorage.getItem("score")) {
+                if (counter < localStorage.getItem("score")) {
+                    localStorage.setItem("score", counter);
                 }
-            }else{
+            } else {
                 localStorage.setItem("score", counter)
             }
         }
@@ -63,7 +71,7 @@ const GlobalProvider = ({ children }) => {
         setAnswer(e.key)
     }
 
-
+    // effect for timer
     useEffect(() => {
         let intervalId;
 
@@ -86,6 +94,8 @@ const GlobalProvider = ({ children }) => {
     }, [isActive, counter])
 
 
+    // reset everythings
+
     function stopTimer() {
         setIsActive(false);
         setCounter(0);
@@ -94,13 +104,11 @@ const GlobalProvider = ({ children }) => {
         setAnswer('');
         setVal('');
         setN(20);
-        localStorage.removeItem("score")
+        setSuccess('')
     }
 
-
-
     const contextValue = {
-        minute, second, setIsActive, isActive, stopTimer, answer, val, handleAnswerChange, counter,stopTimer
+        minute, second, setIsActive, isActive, stopTimer, answer, val, handleAnswerChange, counter, stopTimer, success, setSuccess
     }
     return (
         <GlobalContext.Provider value={contextValue}>

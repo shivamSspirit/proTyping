@@ -3,8 +3,7 @@ import './timer.css'
 import { useGlobal } from '../../context/globalState'
 
 function Timer() {
-    const { minute, val, second, setIsActive, isActive, stopTimer, answer, handleAnswerChange, counter, n } = useGlobal()
-
+    const { minute, val, second, setIsActive, isActive, stopTimer, answer, handleAnswerChange, n, success, setSuccess, counter } = useGlobal()
     const [mainScore, setMainscore] = useState(0)
 
     useEffect(() => {
@@ -13,13 +12,19 @@ function Timer() {
         }
     }, [localStorage.getItem('score'), n])
 
+    useEffect(() => {
+        if (mainScore < counter) {
+            setSuccess("Success")
+        }
+    }, [mainScore, success])
 
     return (
         <div className='mainContainer'>
             <div className="container">
                 <div className='char-container'>
                     <h1 className='char'>
-                        {val}
+                        {!success && val}
+                        {success && success}
                     </h1>
                 </div>
                 <div className="time">
